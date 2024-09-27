@@ -9,7 +9,12 @@ RUN apt-get -y update && apt-get install -y \
     zlib1g zlib1g-dev \
     curl clang-format \
     gtkwave cmake \
-    libspdlog-dev
+    libspdlog-dev \
+    zsh
+
+# Install Oh My Zsh
+RUN chsh -s $(which zsh)
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || true
 
 # Clone and build Verilator from source using the v5.028 tag
 RUN git clone https://github.com/verilator/verilator.git /tmp/verilator && \
@@ -35,3 +40,6 @@ RUN mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 
 # Clean up
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
+
+# Set the default shell to Zsh
+CMD ["zsh"]
