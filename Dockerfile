@@ -15,7 +15,7 @@ RUN apt-get -y update && apt-get install -y \
     zsh
 
 # Fix git issues with the container running as root
-RUN git config --global --add safe.directory *
+RUN git config --global --add safe.directory '*'
 
 # Install Oh My Zsh for convenience
 RUN chsh -s $(which zsh)
