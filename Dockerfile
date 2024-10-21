@@ -37,5 +37,7 @@ RUN tar -xzf verible.tar.gz
 RUN mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
 
+RUN git config --global --add safe.directory *
+
 # Set the default shell to Zsh
 CMD ["zsh"]
