@@ -5,7 +5,7 @@ ARG VERIBLE_VERSION=v0.0-3798-ga602f072
 
 # Install dependencies (mostly for verilator)
 RUN apt-get -y update && apt-get install -y \
-    git help2man perl python3 make autoconf g++ flex bison ccache \
+    git help2man perl python3 make autoconf g++ flex bison ccache gdb \
     libgoogle-perftools-dev numactl perl-doc \
     libfl2 libfl-dev \
     zlib1g zlib1g-dev \
@@ -13,6 +13,9 @@ RUN apt-get -y update && apt-get install -y \
     gtkwave cmake \
     libspdlog-dev \
     zsh
+
+# Fix git issues with the container running as root
+RUN git config --global --add safe.directory *
 
 # Install Oh My Zsh for convenience
 RUN chsh -s $(which zsh)
@@ -36,8 +39,6 @@ RUN curl -L -o verible.tar.gz https://github.com/chipsalliance/verible/releases/
 RUN tar -xzf verible.tar.gz
 RUN mv verible-${VERIBLE_VERSION}/bin/* /usr/local/bin/
 RUN rm -rf verible.tar.gz verible-${VERIBLE_VERSION}
-
-RUN git config --global --add safe.directory *
 
 # Set the default shell to Zsh
 CMD ["zsh"]
