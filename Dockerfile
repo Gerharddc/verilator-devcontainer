@@ -1,7 +1,7 @@
-FROM ubuntu:noble
+FROM ubuntu:latest
 
-ARG VERILATOR_VERSION=v5.028
-ARG VERIBLE_VERSION=v0.0-3798-ga602f072
+ARG VERILATOR_VERSION=v5.036
+ARG VERIBLE_VERSION=v0.0-3992-g1903b809
 
 # Install dependencies (mostly for verilator)
 RUN apt-get -y update && apt-get install -y \
